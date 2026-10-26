@@ -128,6 +128,7 @@ function Icon({ name, size = 20 }) {
       </>
     ),
     arrow: <path d="M7 17 17 7M7 7h10v10" />,
+    arrowDown: <path d="m7 10 5 5 5-5" />,
   };
 
   return <svg {...common}>{paths[name] || paths.code}</svg>;
@@ -135,10 +136,12 @@ function Icon({ name, size = 20 }) {
 
 export default function Home() {
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [backgroundOpacity, setBackgroundOpacity] = useState(1);
 
   useEffect(() => {
     const updateScroll = () => {
       setScrollProgress(Math.min(Math.max(window.scrollY / 280, 0), 1));
+      setBackgroundOpacity(Math.max(1 - window.scrollY / 600, 0));
     };
 
     updateScroll();
@@ -162,8 +165,9 @@ export default function Home() {
           style={{
             backgroundImage: "url('/profile.jpg')",
             backgroundPosition: "center 12%",
+            opacity: backgroundOpacity * 0.6,
             filter: `blur(${backgroundBlur + 18}px)`,
-            transition: "filter 180ms linear",
+            transition: "filter 180ms linear, opacity 180ms linear",
           }}
         />
         <div
@@ -173,8 +177,9 @@ export default function Home() {
             backgroundImage: "url('/profile.jpg')",
             backgroundPosition: "center 12%",
             backgroundSize: "auto 100svh",
+            opacity: backgroundOpacity,
             filter: `blur(${backgroundBlur}px)`,
-            transition: "filter 180ms linear",
+            transition: "filter 180ms linear, opacity 180ms linear",
           }}
         />
         <div
@@ -205,7 +210,7 @@ export default function Home() {
             </div>
           </header>
 
-          <div className="w-full px-2 pb-12 pt-[420px] drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]">
+          <div className="w-full px-2 pb-14 pt-[420px] drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]">
             <div className="mx-auto mb-4 h-px w-10 bg-[#39ff7d] shadow-[0_0_14px_#39ff7d]" />
             <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.32em] text-[#a6ffc1]">
               Developer · Creator
@@ -221,7 +226,7 @@ export default function Home() {
 
             <nav
               aria-label="Social media"
-              className="mt-6 flex items-center justify-center gap-3"
+              className="mt-5 pb-5 flex items-center justify-center gap-3"
             >
               {socialLinks.map((social) => (
                 <a
@@ -238,9 +243,12 @@ export default function Home() {
             </nav>
           </div>
 
-          <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-white/60">
+          <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1 text-white/60">
             <span className="whitespace-nowrap text-[9px] uppercase tracking-[0.3em]">
               Scroll to explore
+            </span>
+            <span className="animate-pulse text-[#8ef6ae]">
+              <Icon name="arrowDown" size={20} />
             </span>
           </div>
         </section>
