@@ -138,35 +138,27 @@ export default function Home() {
 
   useEffect(() => {
     const updateScroll = () => {
-      const scrollableHeight =
-        document.documentElement.scrollHeight - window.innerHeight;
-      const progress =
-        scrollableHeight > 0
-          ? Math.min(Math.max(window.scrollY / scrollableHeight, 0), 1)
-          : 0;
-
-      setScrollProgress(progress);
+      setScrollProgress(Math.min(Math.max(window.scrollY / 280, 0), 1));
     };
 
+    updateScroll();
     window.addEventListener("scroll", updateScroll, { passive: true });
-    window.addEventListener("resize", updateScroll);
 
     return () => {
       window.removeEventListener("scroll", updateScroll);
-      window.removeEventListener("resize", updateScroll);
     };
   }, []);
 
   const backgroundBlur = scrollProgress * 16;
   const backgroundDarkness =
-    0.12 + Math.pow(scrollProgress, 0.72) * 0.64;
+    0.12 + Math.pow(scrollProgress, 0.8) * 0.64;
 
   return (
     <main className="relative min-h-screen overflow-clip bg-[#030504] text-white">
-      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+      <div className="pointer-events-none fixed inset-x-0 top-0 z-0 h-[100svh] overflow-hidden">
         <div
           aria-hidden="true"
-          className="absolute inset-0 scale-[1.12] bg-cover bg-no-repeat opacity-60"
+          className="absolute inset-0 bg-cover bg-no-repeat opacity-60"
           style={{
             backgroundImage: "url('/profile.jpg')",
             backgroundPosition: "center 12%",
@@ -176,10 +168,11 @@ export default function Home() {
         />
         <div
           aria-hidden="true"
-          className="absolute inset-y-0 left-1/2 w-full max-w-[480px] -translate-x-1/2 bg-cover bg-no-repeat"
+          className="absolute inset-y-0 left-1/2 w-full max-w-[480px] -translate-x-1/2 bg-no-repeat"
           style={{
             backgroundImage: "url('/profile.jpg')",
             backgroundPosition: "center 12%",
+            backgroundSize: "auto 100svh",
             filter: `blur(${backgroundBlur}px)`,
             transition: "filter 180ms linear",
           }}
