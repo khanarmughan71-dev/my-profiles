@@ -23,6 +23,21 @@ export default function ContactSection() {
   const triggerRef = useRef(null);
 
   useEffect(() => {
+    const openFromQuickDock = () => {
+      setSubmissionStatus("idle");
+      setIsOpen(true);
+    };
+
+    window.addEventListener("portfolio:open-contact-form", openFromQuickDock);
+
+    return () =>
+      window.removeEventListener(
+        "portfolio:open-contact-form",
+        openFromQuickDock,
+      );
+  }, []);
+
+  useEffect(() => {
     if (!isOpen) {
       return;
     }
@@ -139,7 +154,7 @@ export default function ContactSection() {
           Start a conversation <Icon name="arrow" size={18} />
         </button>
         <span className="contact-decoration" aria-hidden="true">
-          ✳
+          OPEN TO IDEAS
         </span>
       </Reveal>
 

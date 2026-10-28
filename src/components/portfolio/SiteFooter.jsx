@@ -5,8 +5,8 @@ export default function SiteFooter() {
         AK<span>.</span>
         <span className="footer-name">ARMUGHAN HASSAN KHAN</span>
       </a>
-      <span>Designed with purpose. Built with passion.</span>
-      <span>© 2026</span>
+      <span>CRM Solutions Expert | Full Stack Developer | Python Explorer</span>
+      <span>© 2023</span>
     </footer>
   );
 }
