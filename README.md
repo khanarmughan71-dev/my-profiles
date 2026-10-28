@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Armughan Hassan Khan — Portfolio
 
-## Getting Started
+A responsive, portrait-first developer portfolio with project previews, social
+links, and a mobile quick-links dock. The desktop intro uses a framed portrait
+beside the profile; on mobile, the portrait sits above the intro and shifts
+upward beneath a bottom vignette as you scroll. Off-screen portfolio content
+fades away and returns with a subtle blur-to-clear, upward reveal as it enters
+the viewport.
 
-First, run the development server:
+## Run locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Project structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `src/app/page.js` composes the portfolio sections.
+- `src/app/globals.css` contains the responsive theme, layout, and animations.
+- `src/components/portfolio/Hero.jsx` renders the responsive portrait and
+  scroll-linked photo treatment.
+- `src/components/portfolio/WorkSection.jsx` and `ProjectCard.jsx` render work.
+- `src/components/portfolio/LinksSection.jsx` renders profile links.
+- `src/components/portfolio/Reveal.jsx` adds accessible scroll-in animations.
+- `src/components/portfolio/data.js` contains project and profile-link content.
+- `public/profile.jpg` is the portrait used in the hero.
 
-## Learn More
+## Add project screenshots
 
-To learn more about Next.js, take a look at the following resources:
+Place optimized project screenshots in `public/projects/`, then add a
+`previewImage` path to the matching project in
+`src/components/portfolio/data.js`. Reference public files from the site root:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```js
+{
+  name: "Axiora Digital",
+  previewImage: "/projects/axiora.webp",
+  // Keep the remaining project fields here.
+}
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Use landscape screenshots around 1400 × 900 pixels in WebP or AVIF format. If
+`previewImage` is not set, the portfolio displays its built-in project mockup.
 
-## Deploy on Vercel
+## Validate
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run lint
+npm run build
+```

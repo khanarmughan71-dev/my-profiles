@@ -12,9 +12,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Armughan Hassan Khan | Developer & Creator",
+  title: "Armughan Hassan Khan — Developer & Digital Creator",
   description:
-    "Explore Armughan Hassan Khan's projects, freelance services, and social links.",
+    "Explore selected projects, freelance services, and links from Armughan Hassan Khan, a developer and digital creator.",
 };
 
 export default function RootLayout({ children }) {
